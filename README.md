@@ -9,19 +9,14 @@ nist-data-mirror does not rely on any third-party dependencies, only the Java SE
 It can be used in combination with [OWASP Dependency-Check] in order to provide Dependency-Check
 a mirrored copy of NIST data.
 
-For best results, use nist-data-mirror with cron or another scheduler to keep the mirrored data fresh.
+For best results, use `nist-data-mirror` with cron or another scheduler to keep the mirrored data fresh.
 
 ## Usage
 
-### Building
+### Building locally
 
 ```sh
 mvn clean package
-```
-
-### Running
-
-```sh
 java -jar nist-data-mirror.jar <mirror-directory>
 ```
 
@@ -33,10 +28,16 @@ See [EugenMayer/helm-charts](https://github.com/EugenMayer/helm-charts)
 
 ### Docker
 
+The image is release at [ghcr.io/eugenmayer/nist-data-mirror](https://github.com/EugenMayer/nist-data-mirror/pkgs/container/nist-data-mirror)
+
+#### Build yourself
+
 ```sh
 mvn clean package
 docker-compose up -d
 ```
+
+#### Configuration
 assist in debugging other issues. While the image does create an httpd instance
 that mirrors the NVD CVE data feeds - note that it also creates a backup for all
 changed files and there is currently no automatic cleanup.
