@@ -27,36 +27,19 @@ java -jar nist-data-mirror.jar <mirror-directory>
 
 To use a proxy provide http.proxyHost / http.proxyPort system properties.
 
-## Downloading
+### Kubernetes
 
-If you do not wish to download sources and compile yourself, [pre-compiled binaries] are available
-for use. NIST Data Mirror is also available on the Maven Central Repository.
+See (https://github.com/EugenMayer/helm-charts)[https://github.com/EugenMayer/helm-charts]
 
-```xml
-<dependency>
-    <groupId>us.springett</groupId>
-    <artifactId>nist-data-mirror</artifactId>
-    <version>1.6.0</version>
-</dependency>
+### Docker
+
+```sh
+mvn clean package
+docker-compose up -d
 ```
-
-## Docker
-
-A Dockerfile is included, and the image is available on Docker Hub as [sspringett/nvdmirror](https://hub.docker.com/r/sspringett/nvdmirror). This was created to
 assist in debugging other issues. While the image does create an httpd instance
 that mirrors the NVD CVE data feeds - note that it also creates a backup for all
 changed files and there is currently no automatic cleanup.
-
-```
-$ mvn clean package
-$ docker build --rm -t sspringett/nvdmirror .
-$ mkdir target/docs
-$ docker run -dit \
-  --name mirror \
-  -p 80:80 \
-  --mount type=bind,source="$(pwd)"/target/docs/,target=/usr/local/apache2/htdocs \
-  sspringett/nvdmirror
-```
 
 The httpd server will take a minute to spin up as it is mirroring the initial NVD files.
 
