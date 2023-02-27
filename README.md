@@ -29,7 +29,7 @@ To use a proxy provide http.proxyHost / http.proxyPort system properties.
 
 ### Kubernetes
 
-See (https://github.com/EugenMayer/helm-charts)[https://github.com/EugenMayer/helm-charts]
+See [EugenMayer/helm-charts](https://github.com/EugenMayer/helm-charts)
 
 ### Docker
 
