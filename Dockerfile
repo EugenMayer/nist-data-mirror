@@ -24,7 +24,7 @@ LABEL org.label-schema.docker.cmd="docker run -dit --name mirror -p 80:80 --moun
 ENV user=mirror
 
 RUN apk update                                               && \
-    apk add --no-cache openjdk8-jre dcron nss supervisor     && \
+    apk add --no-cache openjdk17-jre dcron nss supervisor     && \
     addgroup -S $user                                        && \
     adduser -S $user -G $user                                && \
     mkdir -p /tmp/nvd                                        && \
