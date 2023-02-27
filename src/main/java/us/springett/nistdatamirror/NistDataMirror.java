@@ -32,6 +32,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPInputStream;
 
 /**
@@ -152,21 +153,21 @@ public class NistDataMirror {
                 doDownload(versionToFilenameMaps.get(version).get("cveJsonRecentUrl"));
             }
             for (int year = START_YEAR; year <= END_YEAR; year++) {
-                downloadVersionForYear(version, year);
+                downloadVersionForYear(version, year, false);
                 Boolean valid = validCheck(year);
-                System.out.println("File " + year + " is valid.");
+                int i = 0;
+                int waitSeconds = 60;
+                while (Boolean.FALSE.equals(valid) && i < 2) {
+                    System.out.println("File " + year + " is invalid.");
+                    System.out.println("Retry in " + waitSeconds + " seconds");
+                    TimeUnit.SECONDS.sleep(60);
+                    downloadVersionForYear(version, year, true);
+                    valid = validCheck(year);
+                    i++;
+                }
                 if (Boolean.FALSE.equals(valid)) {
-                    int i = 0;
-                    while (i < 2) {
-                        downloadVersionForYear(version, year);
-                        Boolean valid2 = validCheck(year);
-                        i++;
-                        if (Boolean.TRUE.equals(valid2)) {
-                            System.out.println("File " + year + " is valid.");
-                            break;
-                        }
-                    }
                     System.out.println("The File " + year + " is corrupted");
+                    downloadFailed = true;
                 }
             }
 
@@ -179,14 +180,14 @@ public class NistDataMirror {
         }
     }
 
-    private void downloadVersionForYear(String version, int year) throws MirrorException {
+    private void downloadVersionForYear(String version, int year, boolean force) throws MirrorException {
         MetaProperties before;
         MetaProperties after;
         String cveBaseMetaUrl = versionToFilenameMaps.get(version).get("cveBaseMeta").replace("%d", String.valueOf(year));
         before = readLocalMetaForURL(cveBaseMetaUrl);
         doDownload(cveBaseMetaUrl);
         after = readLocalMetaForURL(cveBaseMetaUrl);
-        if (before == null || after.getLastModifiedDate() > before.getLastModifiedDate()) {
+        if (before == null || force || after.getLastModifiedDate() > before.getLastModifiedDate()) {
             String cveJsonBaseUrl = versionToFilenameMaps.get(version).get("cveJsonBaseUrl").replace("%d", String.valueOf(year));
             doDownload(cveJsonBaseUrl);
         }
