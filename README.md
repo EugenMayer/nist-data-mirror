@@ -16,8 +16,9 @@ For best results, use `nist-data-mirror` with cron or another scheduler to keep 
 ### Building locally
 
 ```sh
-mvn clean package
-java -jar nist-data-mirror.jar <mirror-directory>
+make build-java
+# or: mvn clean package
+java -jar target/nist-data-mirror.jar <mirror-directory>
 ```
 
 To use a proxy provide http.proxyHost / http.proxyPort system properties.
@@ -33,9 +34,14 @@ The image is release at [ghcr.io/eugenmayer/nist-data-mirror](https://github.com
 #### Build yourself
 
 ```sh
-mvn clean package
-docker-compose up -d
+make build-java
+# or: mvn clean package
+make build-docker
+# or: docker-compose up -d
+make build # this builds them both
 ```
+
+The image is listening on port `80/TCP`. If you want to persist the mirrored data, be sure to mount a volume to `/usr/local/apache2/htdocs`.
 
 #### Configuration
 assist in debugging other issues. While the image does create an httpd instance

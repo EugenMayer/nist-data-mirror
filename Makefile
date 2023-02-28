@@ -2,6 +2,7 @@ build-java:
 	mvn clean package
 
 build-docker:
+	docker pull httpd:alpine
 	docker build . -t ghcr.io/eugenmayer/nist-data-mirror
 
 
