@@ -16,7 +16,7 @@ RUN apk update                                               && \
     rm -v /usr/local/apache2/htdocs/index.html
 
 COPY /docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY /docker/bin/mirror.sh /usr/local/binl/mirror.sh
+COPY /docker/bin/mirror.sh /usr/local/bin/mirror.sh
 COPY /docker/crontab/mirror /etc/crontabs/mirror
 COPY /docker/apache2/mirror.conf /usr/local/apache2/conf
 COPY /target/nist-data-mirror.jar /usr/local/bin/

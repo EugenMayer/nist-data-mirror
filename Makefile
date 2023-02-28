@@ -7,3 +7,6 @@ build-docker:
 
 build: build-java build-docker
 	echo "Build finished"
+
+start:
+	./start.sh
