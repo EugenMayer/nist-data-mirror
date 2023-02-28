@@ -2,7 +2,7 @@
 
 echo "Updating..."
 
-files=$(java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -jar /usr/local/bin/nist-data-mirror.jar /tmp/nvd | grep -Eo '(Download succeeded|Uncompressed).*' | grep -Eo '[^ ]*\.(gz|meta|json|xml)')
+files=$(java -XX:+UnlockExperimentalVMOptions -jar /usr/local/bin/nist-data-mirror.jar /tmp/nvd | grep -Eo '(Download succeeded|Uncompressed).*' | grep -Eo '[^ ]*\.(gz|meta|json|xml)')
 
 timestamp=$(date +%s)
 
