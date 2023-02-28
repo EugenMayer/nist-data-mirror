@@ -2,10 +2,10 @@
 
 A simple Java command-line utility to mirror the NVD (CPE/CVE JSON) data from NIST.
 
-The intended purpose of nist-data-mirror is to be able to replicate the NIST vulnerabiity data
+The intended purpose of `nist-data-mirror` is to be able to replicate the NIST vulnerabiity data
 inside a company firewall so that local (faster) access to NIST data can be achieved.
 
-nist-data-mirror does not rely on any third-party dependencies, only the Java SE core libraries.
+`nist-data-mirror` does not rely on any third-party dependencies, only the Java SE core libraries.
 It can be used in combination with [OWASP Dependency-Check] in order to provide Dependency-Check
 a mirrored copy of NIST data.
 
@@ -16,8 +16,9 @@ For best results, use `nist-data-mirror` with cron or another scheduler to keep 
 ### Building locally
 
 ```sh
-mvn clean package
-java -jar nist-data-mirror.jar <mirror-directory>
+make build-java
+# or: mvn clean package
+java -jar target/nist-data-mirror.jar <mirror-directory>
 ```
 
 To use a proxy provide http.proxyHost / http.proxyPort system properties.
@@ -33,9 +34,14 @@ The image is release at [ghcr.io/eugenmayer/nist-data-mirror](https://github.com
 #### Build yourself
 
 ```sh
-mvn clean package
-docker-compose up -d
+make build-java
+# or: mvn clean package
+make build-docker
+# or: docker-compose up -d
+make build # this builds them both
 ```
+
+The image is listening on port `80/TCP`. If you want to persist the mirrored data, be sure to mount a volume to `/usr/local/apache2/htdocs`.
 
 #### Configuration
 assist in debugging other issues. While the image does create an httpd instance
@@ -60,6 +66,7 @@ container orchestration platforms such as Kubernetes and OpenShift.
 
 ## Related Projects
 
+- Helm chart at[EugenMayer/helm-charts](https://github.com/EugenMayer/helm-charts)
 - [VulnDB Data Mirror](https://github.com/stevespringett/vulndb-data-mirror)
 
 ## Copyright & License
@@ -71,5 +78,4 @@ Dependency-Check is Copyright (c) Jeremy Long. All Rights Reserved.
 Permission to modify and redistribute is granted under the terms of the Apache 2.0 license. See the [LICENSE] [Apache 2.0] file for the full license.
 
 [owasp dependency-check](https://www.owasp.org/index.php/OWASP_Dependency_Check)
-[apache 2.0](https://github.com/stevespringett/nist-data-mirror/blob/master/LICENSE)
-[pre-compiled binaries](https://github.com/stevespringett/nist-data-mirror/releases)
+[apache 2.0](https://github.com/eugenmayer/nist-data-mirror/blob/master/LICENSE)
