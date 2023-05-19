@@ -7,7 +7,7 @@ ARG no_proxy
 ENV user=mirror
 
 RUN apk update                                               && \
-    apk add --no-cache openjdk17-jre dcron nss supervisor    && \
+    apk add --no-cache openjdk17-jre dcron nss supervisor bash && \
     addgroup -S $user                                        && \
     adduser -S $user -G $user                                && \
     mkdir -p /tmp/nvd                                        && \
