@@ -66,13 +66,12 @@ container orchestration platforms such as Kubernetes and OpenShift.
 
 ## Related Projects
 
-- Helm chart at[EugenMayer/helm-charts](https://github.com/EugenMayer/helm-charts)
+- Helm chart at [EugenMayer/helm-charts](https://github.com/EugenMayer/helm-charts)
 - [VulnDB Data Mirror](https://github.com/stevespringett/vulndb-data-mirror)
 
 ## Copyright & License
 
 nist-data-mirror is Copyright (c) Steve Springett. All Rights Reserved.
-
 Dependency-Check is Copyright (c) Jeremy Long. All Rights Reserved.
 
 Permission to modify and redistribute is granted under the terms of the Apache 2.0 license. See the [LICENSE] [Apache 2.0] file for the full license.
