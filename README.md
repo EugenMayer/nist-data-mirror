@@ -64,6 +64,14 @@ _JAVA_OPTIONS="-Dhttps.proxyHost=yourproxyhost.domain -Dhttps.proxyPort=3128 -Dh
 The image is designed to be executed as a random non-root user and can be deployed on
 container orchestration platforms such as Kubernetes and OpenShift.
 
+## Refresh data
+
+The data is refreshed every night using a cron-job. If you want to do it manually, you connect to the container and run
+
+```bash
+/usr/local/bin/mirror.sh
+```
+
 ## Related Projects
 
 - Helm chart at [EugenMayer/helm-charts](https://github.com/EugenMayer/helm-charts)
