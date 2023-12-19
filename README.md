@@ -1,3 +1,7 @@
+# Hint - Archived
+
+This project has been superseeded by [vulnz](https://github.com/jeremylong/Open-Vulnerability-Project/tree/main/vulnz) which offers the nvd json v2 API.
+
 # NIST Data Mirror
 
 A simple Java command-line utility to mirror the NVD (CPE/CVE JSON) data from NIST.
